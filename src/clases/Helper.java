@@ -7,6 +7,7 @@
 package clases;
 
 import java.awt.Component;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -273,5 +274,21 @@ public class Helper {
         return aux;
     }
     
+    public static void llenarTabla(JTable tabla ,ArrayList < Personas> persona ){
+        DefaultTableModel tm;
+        int nf;
+        tm = (DefaultTableModel)tabla.getModel();
+        limpiadoTabla(tabla);
+        nf = persona.size();
+        tm.setRowCount(nf);
+        
+        
+        for (int i = 0; i < nf; i++) {
+            tabla.setValueAt(i+1, i, 0);
+            tabla.setValueAt(persona.get(i).getCedula(), i, 1);
+            tabla.setValueAt(persona.get(i).getNombre(), i, 2);
+            tabla.setValueAt(persona.get(i).getApellido(), i, 3);
+        }
+    }
 
 }
