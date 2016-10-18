@@ -6,8 +6,11 @@
 
 package interfaz;
 
-import clases.Personas;
 import clases.Helper;
+import clases.Personas;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -21,11 +24,21 @@ public class Agregar extends javax.swing.JDialog {
      * Creates new form Agregar
      */
     
-    ArrayList<Personas>persona;
+    String ruta;
+    ObjectOutputStream salida;
+    ArrayList<Personas> personas;
+
     public Agregar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents(); 
-        persona = new ArrayList<>();
+        initComponents();
+        ruta = "src/datos/personas.txt";
+        try {
+            //personas = new ArrayList();
+            salida = new ObjectOutputStream(new FileOutputStream(ruta));
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        Helper.llenarTabla(tblTablaPersona, ruta);
     }
 
     /**
@@ -169,8 +182,8 @@ public class Agregar extends javax.swing.JDialog {
       apellido = txtApellido.getText();
       
       Personas p = new Personas(cedula, nombre, apellido);
-      persona.add(p);
-      Helper.llenarTabla(tblTablaPersona , persona);
+      personas.add(p);
+      Helper.llenarTabla(tblTablaPersona , personas);
       
       txtCedula.setText("");
       txtNombre.setText("");
@@ -183,7 +196,7 @@ public class Agregar extends javax.swing.JDialog {
      
      Personas p;
      i = tblTablaPersona.getSelectedRow();
-     p = persona.get(i);
+     p = personas.get(i);
      
      txtCedula.setText(p.getCedula());
      txtApellido.setText(p.getApellido());
@@ -198,8 +211,8 @@ public class Agregar extends javax.swing.JDialog {
      op= JOptionPane.showConfirmDialog(this,"seguro que desea eliminar a esa persona?","eliminar",JOptionPane.YES_NO_OPTION);
      if(op == JOptionPane.YES_NO_OPTION){
      i = tblTablaPersona.getSelectedRow();
-     persona.remove(i);
-     Helper.llenarTabla(tblTablaPersona, persona);
+     personas.remove(i);
+     Helper.llenarTabla(tblTablaPersona, personas);
       txtCedula.setText("");
       txtNombre.setText("");
       txtApellido.setText("");
