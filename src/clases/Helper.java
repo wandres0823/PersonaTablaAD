@@ -11,7 +11,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -278,31 +282,24 @@ public class Helper {
         return aux;
     }
     
-    
-    
-    public static void llenarTabla(JTable tabla ,String ruta ){
+    public static void llenarTabla(JTable tabla, String ruta){
         DefaultTableModel tm;
         int nf;
-        ArrayList<Personas> personas = traerdatos(ruta);
+        ArrayList<Personas> personas = traerDatos(ruta);
         tm = (DefaultTableModel)tabla.getModel();
         limpiadoTabla(tabla);
         nf = personas.size();
         tm.setRowCount(nf);
-        
-        
         for (int i = 0; i < nf; i++) {
-            tabla.setValueAt(i+1, i, 0);
-            tabla.setValueAt(personas.get(i).getCedula(), i, 1);
-            tabla.setValueAt(personas.get(i).getNombre(), i, 2);
-            tabla.setValueAt(personas.get(i).getApellido(), i, 3);
+           tabla.setValueAt(i+1, i, 0);
+           tabla.setValueAt(personas.get(i).getCedula(), i, 1);
+           tabla.setValueAt(personas.get(i).getNombre(), i, 2);
+           tabla.setValueAt(personas.get(i).getApellido(), i, 3);
         }
     }
     
-    
-    
-    
-    public static ArrayList traerdatos(String ruta){
-          FileInputStream archivo;
+    public static ArrayList traerDatos(String ruta){
+        FileInputStream archivo;
         ObjectInputStream entrada;
         ArrayList personas = new ArrayList();
         Object p;
@@ -320,9 +317,19 @@ public class Helper {
         } catch (ClassNotFoundException ex) {
              System.out.println(ex.getMessage());
         }
-        
-        return personas;
+           return personas;
+    } 
     
+    public static void volcado(ObjectOutputStream salida,ArrayList personas ){
+        for (int i = 0; i < personas.size(); i++) {
+            try {
+                salida.writeObject(personas.get(i));
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+            
+        }
     }
+    
 
 }

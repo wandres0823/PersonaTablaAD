@@ -8,10 +8,13 @@ package interfaz;
 
 import clases.Helper;
 import clases.Personas;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -175,20 +178,25 @@ public class Agregar extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
-      String cedula,nombre,apellido;
-      
-      cedula = txtCedula.getText();
-      nombre = txtNombre.getText();
-      apellido = txtApellido.getText();
-      
-      Personas p = new Personas(cedula, nombre, apellido);
-      personas.add(p);
-      Helper.llenarTabla(tblTablaPersona , personas);
-      
-      txtCedula.setText("");
-      txtNombre.setText("");
-      txtApellido.setText("");
-      txtCedula.requestFocusInWindow();
+         String cedula, nombre, apellido;
+        cedula = txtCedula.getText();
+        nombre = txtNombre.getText();
+        apellido = txtApellido.getText();
+
+        Personas p = new Personas(cedula, nombre, apellido);
+        try {
+            p.guardar(salida);
+        } catch (IOException ex) {
+            Logger.getLogger(Agregar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Helper.llenarTabla(tblTablaPersona, ruta);
+
+        txtCedula.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtCedula.requestFocusInWindow();
+
     }//GEN-LAST:event_cmdGuardarActionPerformed
 
     private void tblTablaPersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTablaPersonaMouseClicked
@@ -206,20 +214,27 @@ public class Agregar extends javax.swing.JDialog {
     }//GEN-LAST:event_tblTablaPersonaMouseClicked
 
     private void cmdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarActionPerformed
-     int i,op;
-     
-     op= JOptionPane.showConfirmDialog(this,"seguro que desea eliminar a esa persona?","eliminar",JOptionPane.YES_NO_OPTION);
-     if(op == JOptionPane.YES_NO_OPTION){
-     i = tblTablaPersona.getSelectedRow();
-     personas.remove(i);
-     Helper.llenarTabla(tblTablaPersona, personas);
-      txtCedula.setText("");
-      txtNombre.setText("");
-      txtApellido.setText("");
-      txtCedula.requestFocusInWindow();
-     }else{
-     
-     }
+    int i, op;
+        op = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar a esta persona?", "Eliminar", JOptionPane.YES_NO_OPTION);
+        
+        ArrayList<Personas> personas = Helper.traerDatos(ruta);
+        if (op == JOptionPane.YES_OPTION) {
+            i = tblTablaPersona.getSelectedRow();
+            personas.remove(i);
+            try {
+                salida = new ObjectOutputStream(new FileOutputStream(ruta));
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Agregar.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Agregar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Helper.volcado(salida, personas);
+            Helper.llenarTabla(tblTablaPersona, ruta);
+            txtCedula.setText("");
+            txtNombre.setText("");
+            txtApellido.setText("");
+            txtCedula.requestFocusInWindow();
+        }
     }//GEN-LAST:event_cmdEliminarActionPerformed
 
     private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
