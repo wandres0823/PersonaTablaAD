@@ -61,10 +61,13 @@ public class Agregar extends javax.swing.JDialog {
         txtApellido = new javax.swing.JTextField();
         txtCedula = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        cmbcombo = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
         cmdEliminar = new javax.swing.JButton();
         cmdLimpiar = new javax.swing.JButton();
-        cmdGuardar = new javax.swing.JButton();
+        cmdGuardar1 = new javax.swing.JButton();
+        cmdNuevo = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTablaPersona = new javax.swing.JTable();
@@ -83,8 +86,8 @@ public class Agregar extends javax.swing.JDialog {
         jLabel2.setText("Apellido");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
-        jLabel3.setText("Cedula");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+        jLabel3.setText("Sexo :");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
         jPanel2.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 100, -1));
         jPanel2.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 100, -1));
 
@@ -94,6 +97,12 @@ public class Agregar extends javax.swing.JDialog {
             }
         });
         jPanel2.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 100, -1));
+
+        jLabel4.setText("Cedula");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        cmbcombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Femenino" }));
+        jPanel2.add(cmbcombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 200, 170));
 
@@ -106,7 +115,7 @@ public class Agregar extends javax.swing.JDialog {
                 cmdEliminarActionPerformed(evt);
             }
         });
-        jPanel3.add(cmdEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
+        jPanel3.add(cmdEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
         cmdLimpiar.setText("Limpiar");
         cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -114,17 +123,25 @@ public class Agregar extends javax.swing.JDialog {
                 cmdLimpiarActionPerformed(evt);
             }
         });
-        jPanel3.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 70, -1));
+        jPanel3.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 70, -1));
 
-        cmdGuardar.setText("Guardar");
-        cmdGuardar.addActionListener(new java.awt.event.ActionListener() {
+        cmdGuardar1.setText("Guardar");
+        cmdGuardar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdGuardarActionPerformed(evt);
+                cmdGuardar1ActionPerformed(evt);
             }
         });
-        jPanel3.add(cmdGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+        jPanel3.add(cmdGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 170, 150));
+        cmdNuevo.setText("Nuevo");
+        cmdNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdNuevoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(cmdNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 70, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 170, 180));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Personas\n"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -177,11 +194,12 @@ public class Agregar extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
-         String cedula, nombre, apellido;
+    private void cmdNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNuevoActionPerformed
+       /*  String cedula, nombre, apellido,sexo;
         cedula = txtCedula.getText();
         nombre = txtNombre.getText();
         apellido = txtApellido.getText();
+       sexo = txtApellido.getText();
 
         Personas p = new Personas(cedula, nombre, apellido);
         try {
@@ -196,8 +214,8 @@ public class Agregar extends javax.swing.JDialog {
         txtNombre.setText("");
         txtApellido.setText("");
         txtCedula.requestFocusInWindow();
-
-    }//GEN-LAST:event_cmdGuardarActionPerformed
+*/
+    }//GEN-LAST:event_cmdNuevoActionPerformed
 
     private void tblTablaPersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTablaPersonaMouseClicked
      int i;
@@ -244,6 +262,22 @@ public class Agregar extends javax.swing.JDialog {
       txtCedula.requestFocusInWindow();
     }//GEN-LAST:event_cmdLimpiarActionPerformed
 
+    private void cmdGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardar1ActionPerformed
+    String cedula, nombre, apellido, sexo;
+        cedula = txtCedula.getText();
+        nombre = txtNombre.getText();
+        apellido = txtApellido.getText();
+        sexo = cmbcombo.getSelectedItem().toString();
+        Personas p = new Personas(cedula, nombre, apellido, sexo);
+        try {
+            p.guardar(salida);
+        } catch (IOException ex) {
+            Logger.getLogger(Agregar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Helper.llenarTabla(tblTablaPersona, ruta);
+    }//GEN-LAST:event_cmdGuardar1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -287,12 +321,15 @@ public class Agregar extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox cmbcombo;
     private javax.swing.JButton cmdEliminar;
-    private javax.swing.JButton cmdGuardar;
+    private javax.swing.JButton cmdGuardar1;
     private javax.swing.JButton cmdLimpiar;
+    private javax.swing.JButton cmdNuevo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
