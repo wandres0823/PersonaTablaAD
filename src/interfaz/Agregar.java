@@ -30,17 +30,18 @@ public class Agregar extends javax.swing.JDialog {
     String ruta;
     ObjectOutputStream salida;
     ArrayList<Personas> personas;
-
+    
     public Agregar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         ruta = "src/datos/personas.txt";
         try {
-            //personas = new ArrayList();
+            personas = Helper.traerDatos(ruta);
             salida = new ObjectOutputStream(new FileOutputStream(ruta));
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+        Helper.volcado(salida, personas);
         Helper.llenarTabla(tblTablaPersona, ruta);
     }
 
@@ -101,7 +102,7 @@ public class Agregar extends javax.swing.JDialog {
         jLabel4.setText("Cedula");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        cmbcombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Femenino" }));
+        cmbcombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Femenino", "Indefinido" }));
         jPanel2.add(cmbcombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 200, 170));
@@ -218,21 +219,22 @@ public class Agregar extends javax.swing.JDialog {
     }//GEN-LAST:event_cmdNuevoActionPerformed
 
     private void tblTablaPersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTablaPersonaMouseClicked
-     int i;
-     
-     Personas p;
-     i = tblTablaPersona.getSelectedRow();
-     p = personas.get(i);
-     
-     txtCedula.setText(p.getCedula());
-     txtApellido.setText(p.getApellido());
-     txtNombre.setText(p.getNombre());
-     
-     
+        int i;
+        Personas p;
+        ArrayList<Personas> personas = Helper.traerDatos(ruta);
+        i = tblTablaPersona.getSelectedRow();
+        
+        p = personas.get(i);
+        
+        txtCedula.setText(p.getCedula());
+        txtNombre.setText(p.getNombre());
+        txtApellido.setText(p.getApellido());
+        
+        cmbcombo.setSelectedItem(p.getSexo());
     }//GEN-LAST:event_tblTablaPersonaMouseClicked
 
     private void cmdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarActionPerformed
-    int i, op;
+        int i, op;
         op = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar a esta persona?", "Eliminar", JOptionPane.YES_NO_OPTION);
         
         ArrayList<Personas> personas = Helper.traerDatos(ruta);
@@ -253,17 +255,20 @@ public class Agregar extends javax.swing.JDialog {
             txtApellido.setText("");
             txtCedula.requestFocusInWindow();
         }
+
     }//GEN-LAST:event_cmdEliminarActionPerformed
 
     private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
-       txtCedula.setText("");
-      txtNombre.setText("");
-      txtApellido.setText("");
-      txtCedula.requestFocusInWindow();
+        txtCedula.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        cmbcombo.setSelectedIndex(0);
+        
+        txtCedula.requestFocusInWindow();
     }//GEN-LAST:event_cmdLimpiarActionPerformed
 
     private void cmdGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardar1ActionPerformed
-    String cedula, nombre, apellido, sexo;
+        String cedula, nombre, apellido, sexo;
         cedula = txtCedula.getText();
         nombre = txtNombre.getText();
         apellido = txtApellido.getText();
@@ -276,6 +281,13 @@ public class Agregar extends javax.swing.JDialog {
         }
         
         Helper.llenarTabla(tblTablaPersona, ruta);
+        
+        txtCedula.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        cmbcombo.setSelectedIndex(0);
+        txtCedula.requestFocusInWindow();
+    
     }//GEN-LAST:event_cmdGuardar1ActionPerformed
 
     /**

@@ -20,11 +20,51 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnAgregarActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnReposter">
+            <Menu class="javax.swing.JMenu" name="mnReportes">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Reposter"/>
+                <Property name="text" type="java.lang.String" value="Reportes"/>
               </Properties>
-            </MenuItem>
+              <SubComponents>
+                <Menu class="javax.swing.JMenu" name="mnListados">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Listados"/>
+                  </Properties>
+                  <SubComponents>
+                    <MenuItem class="javax.swing.JMenuItem" name="mnListadoporsexo">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Listado por sexo"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnListadoporsexoActionPerformed"/>
+                      </Events>
+                    </MenuItem>
+                    <MenuItem class="javax.swing.JMenuItem" name="mnListadoPersona">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Listado por Persona"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnListadoPersonaActionPerformed"/>
+                      </Events>
+                    </MenuItem>
+                  </SubComponents>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="mnCantiidades">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Cantidades"/>
+                  </Properties>
+                  <SubComponents>
+                    <MenuItem class="javax.swing.JMenuItem" name="mnCantidadPerosnasIngresadas">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Cantidad de personas ingresadas"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnCantidadPerosnasIngresadasActionPerformed"/>
+                      </Events>
+                    </MenuItem>
+                  </SubComponents>
+                </Menu>
+              </SubComponents>
+            </Menu>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnSalir">

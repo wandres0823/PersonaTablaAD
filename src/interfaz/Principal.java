@@ -6,6 +6,8 @@
 
 package interfaz;
 
+import clases.Helper;
+
 /**
  *
  * @author walbonis1
@@ -15,8 +17,10 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+     String ruta;
     public Principal() {
         initComponents();
+          ruta = "src/datos/personas.txt";
     }
 
     /**
@@ -33,7 +37,12 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         mnOpciones = new javax.swing.JMenu();
         mnAgregar = new javax.swing.JMenuItem();
-        mnReposter = new javax.swing.JMenuItem();
+        mnReportes = new javax.swing.JMenu();
+        mnListados = new javax.swing.JMenu();
+        mnListadoporsexo = new javax.swing.JMenuItem();
+        mnListadoPersona = new javax.swing.JMenuItem();
+        mnCantiidades = new javax.swing.JMenu();
+        mnCantidadPerosnasIngresadas = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnSalir = new javax.swing.JMenuItem();
 
@@ -59,8 +68,41 @@ public class Principal extends javax.swing.JFrame {
         });
         mnOpciones.add(mnAgregar);
 
-        mnReposter.setText("Reposter");
-        mnOpciones.add(mnReposter);
+        mnReportes.setText("Reportes");
+
+        mnListados.setText("Listados");
+
+        mnListadoporsexo.setText("Listado por sexo");
+        mnListadoporsexo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnListadoporsexoActionPerformed(evt);
+            }
+        });
+        mnListados.add(mnListadoporsexo);
+
+        mnListadoPersona.setText("Listado por Persona");
+        mnListadoPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnListadoPersonaActionPerformed(evt);
+            }
+        });
+        mnListados.add(mnListadoPersona);
+
+        mnReportes.add(mnListados);
+
+        mnCantiidades.setText("Cantidades");
+
+        mnCantidadPerosnasIngresadas.setText("Cantidad de personas ingresadas");
+        mnCantidadPerosnasIngresadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCantidadPerosnasIngresadasActionPerformed(evt);
+            }
+        });
+        mnCantiidades.add(mnCantidadPerosnasIngresadas);
+
+        mnReportes.add(mnCantiidades);
+
+        mnOpciones.add(mnReportes);
         mnOpciones.add(jSeparator1);
 
         mnSalir.setText("Salir");
@@ -103,6 +145,23 @@ public class Principal extends javax.swing.JFrame {
      System.exit(0);
     }//GEN-LAST:event_mnSalirActionPerformed
 
+    private void mnListadoPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnListadoPersonaActionPerformed
+       ListadoCompleto lc = new ListadoCompleto(this,true);
+        lc.setVisible(true);
+    }//GEN-LAST:event_mnListadoPersonaActionPerformed
+
+    private void mnListadoporsexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnListadoporsexoActionPerformed
+        ListadoPorSexo lps = new ListadoPorSexo(this,true);
+       lps.setVisible(true);
+       
+    }//GEN-LAST:event_mnListadoporsexoActionPerformed
+
+    private void mnCantidadPerosnasIngresadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCantidadPerosnasIngresadasActionPerformed
+        int cont;
+        cont = Helper.traerDatos(ruta).size();
+        Helper.mensaje(this, "El número de personas ingresadas es: "+cont, 1);
+    }//GEN-LAST:event_mnCantidadPerosnasIngresadasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -144,8 +203,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuItem mnAgregar;
+    private javax.swing.JMenuItem mnCantidadPerosnasIngresadas;
+    private javax.swing.JMenu mnCantiidades;
+    private javax.swing.JMenuItem mnListadoPersona;
+    private javax.swing.JMenuItem mnListadoporsexo;
+    private javax.swing.JMenu mnListados;
     private javax.swing.JMenu mnOpciones;
-    private javax.swing.JMenuItem mnReposter;
+    private javax.swing.JMenu mnReportes;
     private javax.swing.JMenuItem mnSalir;
     // End of variables declaration//GEN-END:variables
 }
