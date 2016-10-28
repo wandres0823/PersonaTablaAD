@@ -361,5 +361,38 @@ public class Helper {
         
     }
     
-
-}
+    public static boolean  BuscarPersonaCedula (String cedula,String ruta){
+            ArrayList<Personas> personas = traerDatos(ruta);
+            for (int i = 0; i < personas.size(); i++) {
+            if(personas.get(i).getCedula().equalsIgnoreCase(cedula)){
+                return true;
+                
+            }
+        }
+            return false;
+    }
+        
+    public static Personas traerPersonaCedula  (String cedula,String ruta){
+         ArrayList<Personas> personas = traerDatos(ruta);
+          for (int i = 0; i < personas.size(); i++) {
+            if(personas.get(i).getCedula().equalsIgnoreCase(cedula)){
+                return personas.get(i);
+            }
+          }
+          return null;
+    }
+    
+    public static ArrayList<Personas> modificarPersonas(String ruta,String cedula,String nombre,String apellido,String sexo){
+        ArrayList<Personas> personas = traerDatos(ruta);
+        for (int i = 0; i < personas.size(); i++) {
+           if(personas.get(i).getCedula().equalsIgnoreCase(cedula)){
+               personas.get(i).setNombre(nombre);
+               personas.get(i).setApellido(apellido);
+               personas.get(i).setSexo(sexo);
+               return personas;
+           }
+        }
+        return null;
+    }
+    
+    }
